@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hungriger Roboter 🤖 – Unterrichtsmaterial</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --orange: #f78166;
+      --yellow: #d29922;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #161b22 0%, #0d1117 60%, #1a2236 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+    .hero .emoji { font-size: 72px; display: block; margin-bottom: 16px; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), #79c0ff, var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 24px;
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 28px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 12px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .badge span { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .badge .b-blue  { background: var(--accent); }
+    .badge .b-green { background: var(--green); }
+    .badge .b-orange{ background: var(--orange); }
+    .badge .b-yellow{ background: var(--yellow); }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: var(--radius);
+      font-size: 0.92rem; font-weight: 600; text-decoration: none;
+      transition: opacity .15s, transform .15s;
+    }
+    .btn:hover { opacity: .85; transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #0d1117; }
+    .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+
+    /* MAIN */
+    main { max-width: 1060px; margin: 0 auto; padding: 48px 24px; }
+
+    /* HAEPPCHEN */
+    .haeppchen {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px; margin: 24px 0 48px;
+    }
+    .step-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 16px;
+      text-align: center; transition: border-color .2s, transform .2s;
+    }
+    .step-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .step-number {
+      font-size: 1.8rem; font-weight: 800; color: var(--accent);
+      display: block; margin-bottom: 8px;
+    }
+    .step-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
+    .step-card p { font-size: 0.8rem; color: var(--muted); }
+    .step-card .when {
+      display: inline-block; margin-top: 10px;
+      font-size: 0.72rem; background: #21262d;
+      border-radius: 4px; padding: 2px 7px; color: var(--muted);
+    }
+
+    /* SECTION */
+    .section-title {
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 16px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    section { margin-bottom: 52px; }
+
+    /* GRID CARDS */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      transition: border-color .2s, transform .2s;
+      text-decoration: none; color: var(--text); display: block;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card-icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .card h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 6px; }
+    .card p { font-size: 0.82rem; color: var(--muted); }
+    .card .tag {
+      display: inline-block; margin-top: 10px;
+      font-size: 0.72rem; border-radius: 4px;
+      padding: 2px 8px; font-weight: 600;
+    }
+    .tag-ab1 { background: #1f3044; color: #79c0ff; }
+    .tag-ab2 { background: #1f3328; color: var(--green); }
+    .tag-ab3 { background: #3d2214; color: var(--orange); }
+    .tag-ab4 { background: #36290d; color: var(--yellow); }
+    .tag-pdf { background: #2d1b47; color: #c084fc; }
+    .tag-code{ background: #1a2236; color: var(--accent); }
+
+    /* PINS TABLE */
+    .pin-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .pin-table th {
+      background: #21262d; text-align: left;
+      padding: 10px 14px; color: var(--muted); font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    .pin-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+    .pin-table tr:last-child td { border-bottom: none; }
+    .pin { display: inline-block; background: #1f3044; color: var(--accent); border-radius: 4px; padding: 1px 7px; font-family: monospace; font-size: 0.82rem; }
+
+    /* CODE BLOCK */
+    pre {
+      background: #161b22; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      overflow-x: auto; font-size: 0.82rem; line-height: 1.7;
+    }
+    code { font-family: "SFMono-Regular", Consolas, monospace; color: #e6edf3; }
+    .kw { color: #ff7b72; } .fn { color: #d2a8ff; }
+    .cm { color: #8b949e; font-style: italic; } .nm { color: #79c0ff; }
+    .str { color: #a5d6ff; }
+
+    /* LEVELS */
+    .level-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .level {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px;
+    }
+    .level h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+    .level ul { padding-left: 16px; font-size: 0.82rem; color: var(--muted); }
+    .level ul li { margin-bottom: 3px; }
+    .level-g { border-left: 3px solid var(--green); }
+    .level-y { border-left: 3px solid var(--yellow); }
+    .level-r { border-left: 3px solid var(--orange); }
+
+    /* LINKS */
+    .link-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none; color: var(--accent); font-size: 0.88rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 8px 16px;
+      transition: background .15s, border-color .15s;
+    }
+    .ext-link:hover { background: #1f3044; border-color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); text-align: center;
+      padding: 24px; font-size: 0.8rem; color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 40px 16px 32px; }
+      main { padding: 32px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="emoji">🤖</span>
+  <h1>Hungriger Roboter</h1>
+  <p>Unterrichtsmaterial · Klasse 9 · Gemeinschaftsschule BW · Bildungsplan 2016<br>
+     Thema: <strong>Arduino Uno und Sensoren (+Aktoren)</strong></p>
+
+  <div class="badges">
+    <span class="badge"><span class="b-blue"></span>Bildungsplan 2016 BW</span>
+    <span class="badge"><span class="b-green"></span>Klasse 9</span>
+    <span class="badge"><span class="b-orange"></span>Arduino Uno</span>
+    <span class="badge"><span class="b-yellow"></span>HC‑SR04 · Servo</span>
+    <span class="badge"><span class="b-blue"></span>Tinkercad</span>
+  </div>
+
+  <div class="btn-row">
+    <a href="https://github.com/jbkunama1/trt.HungrigerRoboter" class="btn btn-primary">📂 GitHub Repo</a>
+    <a href="https://www.thingiverse.com/thing:2824451" class="btn btn-secondary">🖨️ 3D‑Modell (Thingiverse)</a>
+    <a href="https://www.tinkercad.com" class="btn btn-secondary">🔧 Tinkercad öffnen</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HÄPPCHEN-PRINZIP -->
+  <section>
+    <h2 class="section-title">🧩 Häppchen-Prinzip – Gestufte Hilfe</h2>
+    <div class="haeppchen">
+      <div class="step-card">
+        <span class="step-number">AB0</span>
+        <h3>Deckblatt</h3>
+        <p>Name, Klasse, Überblick über das Projekt</p>
+        <span class="when">Mit der Einheit</span>
+      </div>
+      <div class="step-card">
+        <span class="step-number">AB1</span>
+        <h3>Anleitung & Planung</h3>
+        <p>Aufgabenstellung ohne Code und Schaltplan</p>
+        <span class="when">Sofort starten</span>
+      </div>
+      <div class="step-card">
+        <span class="step-number">AB2</span>
+        <h3>Tinkercad‑Code</h3>
+        <p>Beispielcode + Verständnisfragen</p>
+        <span class="when">Bei Code-Problemen</span>
+      </div>
+      <div class="step-card">
+        <span class="step-number">AB3</span>
+        <h3>Schaltplan</h3>
+        <p>Pin-Tabelle, Verdrahtung, Debugging</p>
+        <span class="when">Bei Hardware-Problemen</span>
+      </div>
+      <div class="step-card">
+        <span class="step-number">AB4</span>
+        <h3>Differenzierung</h3>
+        <p>Lückentext · LED · Experten-Challenge</p>
+        <span class="when">Für schnelle Gruppen</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARBEITSBLÄTTER -->
+  <section>
+    <h2 class="section-title">📋 Arbeitsblätter</h2>
+    <div class="grid">
+      <a href="arbeitsblaetter/AB0_Deckblatt.md" class="card">
+        <div class="card-icon">📄</div>
+        <h3>AB0 – Deckblatt</h3>
+        <p>Titelseite für SuS: Name, Klasse, Datum, Überblick.</p>
+        <span class="tag tag-ab1">Alle</span>
+      </a>
+      <a href="arbeitsblaetter/AB1_Anleitung_HungrigerRoboter.md" class="card">
+        <div class="card-icon">🔍</div>
+        <h3>AB1 – Anleitung & Aufgaben</h3>
+        <p>Systemskizze, Pseudocode, Planung – ohne Lösung.</p>
+        <span class="tag tag-ab1">Challenge-Gruppen</span>
+      </a>
+      <a href="arbeitsblaetter/AB2_Tinkercad_Programmierung.md" class="card">
+        <div class="card-icon">💻</div>
+        <h3>AB2 – Tinkercad-Programmierung</h3>
+        <p>Arduino-Sketch mit HC‑SR04 und Servo, Verständnisfragen.</p>
+        <span class="tag tag-ab2">Nur bei Bedarf</span>
+      </a>
+      <a href="arbeitsblaetter/AB3_Schaltplan_Verdrahtung.md" class="card">
+        <div class="card-icon">🔌</div>
+        <h3>AB3 – Schaltplan & Verdrahtung</h3>
+        <p>Pin-Zuordnung, Schritt-für-Schritt, Debugging-Checkliste.</p>
+        <span class="tag tag-ab3">Letzte Hilfe</span>
+      </a>
+      <a href="arbeitsblaetter/AB4_Differenzierung_Erweiterung.md" class="card">
+        <div class="card-icon">⚡</div>
+        <h3>AB4 – Differenzierung & Extras</h3>
+        <p>🟢 Lückentext · 🟡 LED/Buzzer · 🔴 Experten-Challenge</p>
+        <span class="tag tag-ab4">Schnelle Gruppen</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PDFs -->
+  <section>
+    <h2 class="section-title">📎 Begleit-PDFs</h2>
+    <div class="grid">
+      <a href="arbeitsblaetter/pdfs/Hauptarbeitsblatt_HC-SR04.pdf" class="card">
+        <div class="card-icon">📗</div>
+        <h3>Hauptarbeitsblatt HC‑SR04</h3>
+        <p>Funktionsweise, Formel zur Entfernungsmessung, Pinbelegung.</p>
+        <span class="tag tag-pdf">PDF</span>
+      </a>
+      <a href="arbeitsblaetter/pdfs/Arbeitsblatt_Entfernung-messen.pdf" class="card">
+        <div class="card-icon">📏</div>
+        <h3>Entfernung messen (Funduino)</h3>
+        <p>Schritt-für-Schritt: PulseIn, Serial Monitor, Schaltungsaufbau.</p>
+        <span class="tag tag-pdf">PDF</span>
+      </a>
+      <a href="arbeitsblaetter/pdfs/HC-SR04-1LED_Steckplatine.pdf" class="card">
+        <div class="card-icon">🔦</div>
+        <h3>Steckplatinenplan + LED</h3>
+        <p>Verdrahtungsplan für HC‑SR04 mit Status-LED.</p>
+        <span class="tag tag-pdf">PDF</span>
+      </a>
+      <a href="arbeitsblaetter/pdfs/HCSR04_Platine.pdf" class="card">
+        <div class="card-icon">🖼️</div>
+        <h3>Platine – Alternativdarstellung</h3>
+        <p>Zweite Schaltungsdarstellung für den HC‑SR04.</p>
+        <span class="tag tag-pdf">PDF</span>
+      </a>
+      <a href="arbeitsblaetter/pdfs/Tinkercad_Block.pdf" class="card">
+        <div class="card-icon">🧱</div>
+        <h3>Tinkercad Blockcode</h3>
+        <p>Visuelle Blockprogrammierung als Einstiegshilfe.</p>
+        <span class="tag tag-pdf">PDF</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- SCHALTPLAN -->
+  <section>
+    <h2 class="section-title">🔌 Pin-Zuordnung auf einen Blick</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+      <div>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:10px;">HC‑SR04 – Ultraschallsensor</p>
+        <table class="pin-table">
+          <thead><tr><th>Sensor-Pin</th><th>→ Arduino</th></tr></thead>
+          <tbody>
+            <tr><td>VCC</td><td><span class="pin">5V</span></td></tr>
+            <tr><td>GND</td><td><span class="pin">GND</span></td></tr>
+            <tr><td>TRIG</td><td><span class="pin">Pin 7</span></td></tr>
+            <tr><td>ECHO</td><td><span class="pin">Pin 6</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:10px;">Servo SG90</p>
+        <table class="pin-table">
+          <thead><tr><th>Kabel</th><th>→ Arduino</th></tr></thead>
+          <tbody>
+            <tr><td>Rot (+)</td><td><span class="pin">5V</span></td></tr>
+            <tr><td>Braun / Schwarz (−)</td><td><span class="pin">GND</span></td></tr>
+            <tr><td>Orange / Gelb (Signal)</td><td><span class="pin">Pin 9</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE -->
+  <section>
+    <h2 class="section-title">💻 Arduino-Sketch (Vorschau)</h2>
+    <a href="code/HungrigerRoboter_HCSR04.ino" class="card" style="margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;">
+      <span>📥</span> <strong>HungrigerRoboter_HCSR04.ino herunterladen</strong>
+      <span class="tag tag-code">Arduino C++</span>
+    </a>
+    <pre><code><span class="kw">#include</span> <span class="str">&lt;Servo.h&gt;</span>
+
+<span class="kw">const int</span> <span class="nm">trigPin</span>  = 7;   <span class="cm">// HC-SR04 TRIG → Pin 7</span>
+<span class="kw">const int</span> <span class="nm">echoPin</span>  = 6;   <span class="cm">// HC-SR04 ECHO → Pin 6</span>
+<span class="kw">const int</span> <span class="nm">servoPin</span> = 9;   <span class="cm">// Servo → Pin 9 (PWM)</span>
+
+Servo mouth;
+
+<span class="kw">long</span> <span class="fn">measureDistance</span>() {
+  <span class="fn">digitalWrite</span>(trigPin, LOW);
+  <span class="fn">delayMicroseconds</span>(2);
+  <span class="fn">digitalWrite</span>(trigPin, HIGH);
+  <span class="fn">delayMicroseconds</span>(10);
+  <span class="fn">digitalWrite</span>(trigPin, LOW);
+
+  <span class="kw">long</span> duration = <span class="fn">pulseIn</span>(echoPin, HIGH, 30000);
+  <span class="kw">return</span> duration / 58;  <span class="cm">// Entfernung in cm</span>
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  mouth.<span class="fn">attach</span>(servoPin);
+  mouth.<span class="fn">write</span>(0);   <span class="cm">// Mund geschlossen</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">long</span> d = <span class="fn">measureDistance</span>();
+  <span class="kw">if</span> (d &gt; 0 &amp;&amp; d &lt; 10) {
+    mouth.<span class="fn">write</span>(70); <span class="fn">delay</span>(600);  <span class="cm">// Mund auf</span>
+    mouth.<span class="fn">write</span>(0);  <span class="fn">delay</span>(600);  <span class="cm">// Mund zu</span>
+  }
+  <span class="fn">delay</span>(100);
+}</code></pre>
+  </section>
+
+  <!-- DIFFERENZIERUNG -->
+  <section>
+    <h2 class="section-title">🎯 Differenzierungsniveaus</h2>
+    <div class="level-grid">
+      <div class="level level-g">
+        <h3>🟢 Basis</h3>
+        <ul>
+          <li>Code-Lückentext ausfüllen</li>
+          <li>Funktionsprinzip erklären</li>
+          <li>Schaltung nach Plan aufbauen</li>
+        </ul>
+      </div>
+      <div class="level level-y">
+        <h3>🟡 Erweitert</h3>
+        <ul>
+          <li>Status-LED einbauen (Pin 3)</li>
+          <li>Buzzer beim „Essen" ergänzen</li>
+          <li>Serial Monitor auswerten</li>
+        </ul>
+      </div>
+      <div class="level level-r">
+        <h3>🔴 Experten</h3>
+        <ul>
+          <li>Mittelwert aus 5 Messungen</li>
+          <li>Zwei Entfernungszonen</li>
+          <li>Eigene Tinkercad-Erweiterung</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNTERRICHT -->
+  <section>
+    <h2 class="section-title">🏫 Unterrichtsplanung</h2>
+    <div class="grid">
+      <a href="unterricht/Ablaufplan_Stunde_Arduino_HCSR04_HungrigerRoboter.md" class="card">
+        <div class="card-icon">🕒</div>
+        <h3>Ablaufplan (90 Min)</h3>
+        <p>5 Phasen: Einstieg · Basisaufgabe · Challenge · Arbeitsphase · Sicherung</p>
+        <span class="tag tag-code">Lehrerdokument</span>
+      </a>
+      <a href="unterricht/Didaktik_Bildungsplan2016_Technik_GMS9.md" class="card">
+        <div class="card-icon">📖</div>
+        <h3>Didaktik & Bildungsplan 2016</h3>
+        <p>Kompetenzbereiche, Leitperspektiven, Scaffolding-Begründung</p>
+        <span class="tag tag-code">Lehrerdokument</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- EXTERNE LINKS -->
+  <section>
+    <h2 class="section-title">🔗 Links</h2>
+    <div class="link-list">
+      <a href="https://www.thingiverse.com/thing:2824451" class="ext-link">🖨️ 3D-Modell (Thingiverse)</a>
+      <a href="https://github.com/happythingsmaker/TrashEatingRobot" class="ext-link">🔧 Original-Code (GitHub)</a>
+      <a href="https://www.tinkercad.com" class="ext-link">📐 Tinkercad</a>
+      <a href="https://www.bildungsplaene-bw.de" class="ext-link">🎓 Bildungsplan 2016 BW</a>
+      <a href="https://github.com/jbkunama1/trt.HungrigerRoboter" class="ext-link">📂 GitHub Repo</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Unterrichtsmaterial · Klasse 9 · Gemeinschaftsschule BW · Bildungsplan 2016 · @jbkunama1
+</footer>
+
+</body>
+</html>
