@@ -1,5 +1,9 @@
 # 🤖 Hungriger Roboter (Hungry Robot)
 
+<a href="https://www.buymeacoffee.com/highfish">
+<img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
+
 [![Made for Education](https://img.shields.io/badge/made%20for-education-blue)](#)
 ![Bildungsplan 2016](https://img.shields.io/badge/Bildungsplan-2016%20BW-orange)
 ![Klasse 9](https://img.shields.io/badge/Klasse-9-yellow)
@@ -35,3 +39,4 @@ trt.HungrigerRoboter
 - Die 5 beigefügten PDFs liegen im Ordner `arbeitsblaetter/pdfs/`.
 - Die Arbeitsblätter sind als gestufte Hilfen aufgebaut: AB1 → AB2 → AB3 → AB4.
 - `index.md` kann als einfache GitHub-Pages-Startseite genutzt werden.
+
