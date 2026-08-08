@@ -5,8 +5,8 @@
 </a>
 
 [![Made for Education](https://img.shields.io/badge/made%20for-education-blue)](#)
-![Bildungsplan 2016](https://img.shields.io/badge/Bildungsplan-2016%20BW-orange)
-![Klasse 9](https://img.shields.io/badge/Klasse-9-yellow)
+[![Bildungsplan 2016](https://img.shields.io/badge/Bildungsplan-2016%20BW-orange)](https://github.com/jbkunama1/trt.HungrigerRoboter)
+[![Klasse 9](https://img.shields.io/badge/Klasse-9-yellow)](https://github.com/jbkunama1/trt.HungrigerRoboter)
 
 > 🎯 **Zusatzaufgabe Klasse 9 – Gemeinschaftsschule BW (Bildungsplan 2016)**  
 > Thema der Einheit: **Arduino Uno und Sensoren (+Aktoren)**  
@@ -39,4 +39,3 @@ trt.HungrigerRoboter
 - Die 5 beigefügten PDFs liegen im Ordner `arbeitsblaetter/pdfs/`.
 - Die Arbeitsblätter sind als gestufte Hilfen aufgebaut: AB1 → AB2 → AB3 → AB4.
 - `index.md` kann als einfache GitHub-Pages-Startseite genutzt werden.
-
